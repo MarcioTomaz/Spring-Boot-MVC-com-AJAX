@@ -21,9 +21,7 @@ public class DemoAjaxApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		SocialMetaTag tag = service.getSocialMetaTagByUrl("https://www.colombo.com.br/produto/Eletroportateis/Jarra-Eletrica-Cadence-1-7-Litros-Preta-CEL550");
-		System.out.println(tag.toString()); 
-		
+	
 	
 	}
 

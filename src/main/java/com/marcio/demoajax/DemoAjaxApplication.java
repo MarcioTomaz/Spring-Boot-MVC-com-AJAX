@@ -21,11 +21,10 @@ public class DemoAjaxApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		SocialMetaTag og = service.getOpenGraphByUrl("https://www.pichau.com.br/cadeira-gamer-dt3-sports-elise-rainbow-six-grey-12343-3");
-		System.out.println(og.toString());
+		SocialMetaTag tag = service.getSocialMetaTagByUrl("https://www.colombo.com.br/produto/Eletroportateis/Jarra-Eletrica-Cadence-1-7-Litros-Preta-CEL550");
+		System.out.println(tag.toString()); 
 		
-		SocialMetaTag twitter = service.getTwitterCardByUrl("https://www.pichau.com.br/cadeira-gamer-dt3-sports-elise-rainbow-six-grey-12343-3");
-		System.out.println(twitter.toString());
+	
 	}
 
 }

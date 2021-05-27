@@ -14,11 +14,12 @@ $("#linkPromocao").on('change', function(){
 				$("#alert").removeClass("alert alert-danger").text('');
 				$("#titulo").val("");
 				$("#site").text("");
-				$("#linkImagem").attr("src", "http://localhost:8080/images/promo-dark.png");
+				$("#linkImagem").attr("src", "");
+				$("#loader-img").addClass("loader");
+
 			},
 			success: function( data ){
-				console.log(data);
-				
+				console.log(data);				
 											
 				$("#titulo").val(data.title);
 				$("#site").text(data.site.replace("@", ));
@@ -28,13 +29,21 @@ $("#linkPromocao").on('change', function(){
 				404: function(){
 					$("#alert").addClass("alert alert-danger")
 						.text("Nenhuma informação pode ser recuperada dessa URL");
+						
+					$("#linkImagem").attr("src", "/images/promo-dark.png");
+
 				}
 			},
 			error: function(){
 					$("#alert").addClass("alert alert-danger")
 						.text("Ops... algo deu errado, tente mais tarde");
-				}			
+						
+					$("#linkImagem").attr("src", "/images/promo-dark.png");
+				},
+				complete: function() {
+				$("#loader-img").removeClass("loader");
+			}		
 		});
 		
-	}
+	};
 })

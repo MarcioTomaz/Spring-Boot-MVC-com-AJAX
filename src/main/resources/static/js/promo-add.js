@@ -20,13 +20,17 @@ $("#form-add-promo").submit(function(evento){
 		method:"POST",
 		url: "/promocao/save",
 		data: promo,
+		beforeSend: function(){
+			$("#form-add-promo").hide();
+			$("#loader-form").addClass("loader").show();
+		},
 		success: function(){
 			
 			$("#form-add-promo").each(function(){
 				this.reset();
 			});
 			
-			$("#linkImagem").attr("src","/images/promo-dark.png");
+			$("#linkImagem").attr("src","/images/tenor.gif");
 			$("#site").text("");
 			
 			$("#alert").addClass("alert alert-success").text("Ok! Promoção cadastrada com sucesso.");
@@ -34,7 +38,15 @@ $("#form-add-promo").submit(function(evento){
 		error: function(xhr){			
 			console.log("> error: ",xhr.responseText);
 			
-			$("alert").addClass("alert alert-danger").text("Não foi possível salvar esta promoção.");			
+			$("#alert").addClass("alert alert-danger").text("Não foi possível salvar esta promoção.");			
+		},
+		complete: function(){
+			
+			$("#loader-form").fadeOut(800, function(){
+			$("#form-add-promo").fadeIn(250);
+			$("#loader-form").removeClass("loader");
+									
+		})
 		}
 	})		
 	
@@ -74,7 +86,7 @@ $("#linkPromocao").on('change', function(){
 					$("#alert").addClass("alert alert-danger")
 						.text("Nenhuma informação pode ser recuperada dessa URL");
 						
-					$("#linkImagem").attr("src", "/images/promo-dark.png");
+					$("#linkImagem").attr("src", "/images/tenor.gif");
 
 				}
 			},
@@ -82,7 +94,7 @@ $("#linkPromocao").on('change', function(){
 					$("#alert").addClass("alert alert-danger")
 						.text("Ops... algo deu errado, tente mais tarde");
 						
-					$("#linkImagem").attr("src", "/images/promo-dark.png");
+					$("#linkImagem").attr("src", "/images/tenor.gif");
 				},
 				complete: function() {
 				$("#loader-img").removeClass("loader");

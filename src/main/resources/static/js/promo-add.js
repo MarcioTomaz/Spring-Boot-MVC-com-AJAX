@@ -40,6 +40,18 @@ $("#form-add-promo").submit(function(evento){
 			
 			$("#alert").addClass("alert alert-danger").text("Não foi possível salvar esta promoção.");			
 		},
+		statusCode: {
+			422: function(xhr) {
+				console.log('status error:', xhr.status);
+				var errors = $.parseJSON(xhr.responseText);
+				$.each(errors, function(key, val){
+					$("#" + key).addClass("is-invalid");
+					$("#error-" + key)
+						.addClass("invalid-feedback")
+						.append("<span class='error-span'>" + val + "</span>")
+				});
+			}
+		},
 		complete: function(){
 			
 			$("#loader-form").fadeOut(800, function(){

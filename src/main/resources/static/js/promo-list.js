@@ -59,6 +59,22 @@ function loadByScrollBar(pageNumber){
 	
 }
 
+// AutoComplete
+$("#autocomplete-input").autocomplete({
+	source: function(request,response){
+		$.ajax({
+			method: "GET",
+			url: "/promocao/site",
+			data:{
+				termo: request.term				
+			},
+			success: function(result){
+				response(result);
+			}
+		});
+	}
+});
+
 // Adicionar likes | espera um clique em qualquer botao q tenha likes-btn-
 $(document).on("click", "button[id*='likes-btn-']", function(){
 	var id = $(this).attr("id").split("-")[2];
